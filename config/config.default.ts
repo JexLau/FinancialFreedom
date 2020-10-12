@@ -10,14 +10,38 @@ export default (appInfo: EggAppInfo) => {
   // add your egg config in here
   config.middleware = [];
 
-  // add your special config in here
-  const bizConfig = {
-    sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+  };
+
+  // 数据库
+  config.sequelize = {
+    database: 'finance',
+    host: '127.0.0.1',
+    port: 3306,
+    username: 'root',
+    password: '123456',
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000,
+    },
+    dialectOptions: {
+      dateStrings: true,
+      typeCast(field, next) {
+        if (field.type === 'DATETIME') {
+          return field.string();
+        }
+        return next();
+      },
+    },
+    timezone: '+00:00',
+    logging: false,
   };
 
   // the return config will combines to EggAppConfig
   return {
     ...config,
-    ...bizConfig,
   };
 };
