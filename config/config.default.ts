@@ -15,6 +15,12 @@ export default (appInfo: EggAppInfo) => {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
   };
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+
   // 数据库
   config.sequelize = {
     database: 'finance',

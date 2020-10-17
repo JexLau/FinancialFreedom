@@ -7,6 +7,9 @@ declare namespace Api {
       /** 登录密码 */
       Password: string;
     }
+    interface LoginVo {
+
+    }
     /** 注册 */
     interface RegisterPo {
       /** 注册名 */
@@ -15,6 +18,9 @@ declare namespace Api {
       UserAccount: string;
       /** 注册密码 */
       Password: string;
+    }
+    interface RegisterVo {
+
     }
   }
 }

@@ -27,7 +27,8 @@
     "egg-scripts": "^2.6.0",
     "egg-sequelize": "^6.0.0",
     "moment-timezone": "^0.5.31",
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
