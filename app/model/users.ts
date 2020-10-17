@@ -55,6 +55,9 @@ module.exports = (app: Application) => {
       field: 'UpdatedAt',
     },
   };
-  const Users = app.model.define('users', attributes);
+  const Users = app.model.define('users', attributes, {
+    createdAt: 'CreatedAt',
+    updatedAt: 'UpdatedAt'
+  });
   return Users;
 };

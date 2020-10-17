@@ -18,12 +18,6 @@ module.exports = (app: Application) => {
       comment: 'UserId',
       field: 'UserId',
     },
-    UserName: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-      comment: 'UserName',
-      field: 'UserName',
-    },
     TypeName: {
       type: DataTypes.STRING(50),
       allowNull: false,
@@ -40,21 +34,19 @@ module.exports = (app: Application) => {
     CreatedAt: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
       comment: '创建时间',
       field: 'CreatedAt',
     },
     UpdatedAt: {
       type: DataTypes.DATE,
       allowNull: true,
-      primaryKey: false,
-      autoIncrement: false,
       comment: '更新时间',
       field: 'UpdatedAt',
     },
   };
-  const Recordtypes = app.model.define('recordtypes', attributes);
+  const Recordtypes = app.model.define('recordtypes', attributes, {
+    createdAt: 'CreatedAt',
+    updatedAt: 'UpdatedAt'
+  });
   return Recordtypes;
 };

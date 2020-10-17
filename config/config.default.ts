@@ -33,6 +33,10 @@ export default (appInfo: EggAppInfo) => {
       min: 0,
       idle: 10000,
     },
+    define: {
+      freezeTableName: true,
+      underscored: false,
+    },
     dialectOptions: {
       dateStrings: true,
       typeCast(field, next) {
