@@ -22,33 +22,33 @@ export default (appInfo: EggAppInfo) => {
   };
 
   // 数据库
-  config.sequelize = {
-    database: 'finance',
-    host: '127.0.0.1',
-    port: 3306,
-    username: 'root',
-    password: '123456',
-    pool: {
-      max: 5,
-      min: 0,
-      idle: 10000,
-    },
-    define: {
-      freezeTableName: true,
-      underscored: false,
-    },
-    dialectOptions: {
-      dateStrings: true,
-      typeCast(field, next) {
-        if (field.type === 'DATETIME') {
-          return field.string();
-        }
-        return next();
-      },
-    },
-    timezone: '+00:00',
-    logging: false,
-  };
+  // config.sequelize = {
+  //   database: 'finance',
+  //   host: '127.0.0.1',
+  //   port: 3306,
+  //   username: 'root',
+  //   password: '123456',
+  //   pool: {
+  //     max: 5,
+  //     min: 0,
+  //     idle: 10000,
+  //   },
+  //   define: {
+  //     freezeTableName: true,
+  //     underscored: false,
+  //   },
+  //   dialectOptions: {
+  //     dateStrings: true,
+  //     typeCast(field, next) {
+  //       if (field.type === 'DATETIME') {
+  //         return field.string();
+  //       }
+  //       return next();
+  //     },
+  //   },
+  //   timezone: '+00:00',
+  //   logging: false,
+  // };
 
   // the return config will combines to EggAppConfig
   return {

@@ -1,6 +1,9 @@
 import { Controller } from 'egg';
+import { Get, Post, Delete, Put, Prefix } from 'egg-shell-decorators';
 
+@Prefix('/api/v1/accounts')
 export default class AccountController extends Controller {
+  @Post('/createAccount')
   public async createAccount() {
     const { ctx } = this;
     try {
@@ -18,6 +21,7 @@ export default class AccountController extends Controller {
     }
   }
 
+  @Get('/account/:UserId')
   public async account() {
     const { ctx } = this;
     try {
@@ -35,6 +39,7 @@ export default class AccountController extends Controller {
     }
   }
 
+  @Delete('/deleteAccount/:AccountId')
   public async deleteAccount() {
     const { ctx } = this;
     try {
@@ -52,6 +57,7 @@ export default class AccountController extends Controller {
     }
   }
 
+  @Put('/updateAccount/:AccountId')
   public async updateAccount() {
     const { ctx } = this;
     try {

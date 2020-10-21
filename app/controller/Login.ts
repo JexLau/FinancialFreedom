@@ -1,6 +1,9 @@
 import { Controller } from 'egg';
+import { Post, Prefix } from 'egg-shell-decorators';
 
+@Prefix('/api/v1/login')
 export default class LoginController extends Controller {
+  @Post('/login')
   public async login() {
     const { ctx } = this;
     try {
@@ -18,6 +21,7 @@ export default class LoginController extends Controller {
     }
   }
 
+  @Post('/register')
   public async register() {
     const { ctx } = this;
     try {

@@ -2,10 +2,10 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportAccounts from '../../../app/model/accounts';
-import ExportRecords from '../../../app/model/records';
-import ExportRecordtypes from '../../../app/model/recordtypes';
-import ExportUsers from '../../../app/model/users';
+import ExportAccounts from '../../../app/model/Accounts';
+import ExportRecords from '../../../app/model/Records';
+import ExportRecordtypes from '../../../app/model/Recordtypes';
+import ExportUsers from '../../../app/model/Users';
 
 declare module 'egg' {
   interface IModel {

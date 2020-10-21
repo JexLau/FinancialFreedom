@@ -1,5 +1,6 @@
 import { Service } from 'egg';
 import { v4 as uuidv4 } from 'uuid';
+import Users from "../model/Users";
 /**
  * Login Service
  */
@@ -11,12 +12,12 @@ export default class Login extends Service {
      */
     public async Login(User: Api.Login.APostLogin.Request): Promise<Api.Login.APostLogin.Response> {
         try {
-            const UserInfo = await this.ctx.model.Users.findOne({
+            const UserInfo = await Users.findOne({
                 where: {
                     UserAccount: User.UserAccount,
                 },
                 raw: true,
-            });
+            })
 
             if (UserInfo) {
                 if (User.Password === UserInfo.Password) {
@@ -53,7 +54,7 @@ export default class Login extends Service {
      */
     public async Register(User: Api.Login.APostRegister.Request): Promise<Api.Login.APostRegister.Response> {
         try {
-            await this.ctx.model.Users.create({
+            await Users.create({
                 Id: uuidv4(),
                 UserName: User.UserName,
                 UserAccount: User.UserAccount,

@@ -1,62 +1,64 @@
-import { Application } from 'egg';
+/** 记录 */
+import { Column, CreatedAt, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { DataTypes } from 'sequelize';
 
-module.exports = (app: Application) => {
-  const DataTypes = app.Sequelize;
-  const attributes = {
-    Id: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: false,
-      comment: 'Id',
-      field: 'Id',
-    },
-    UserId: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-      comment: 'UserId',
-      field: 'UserId',
-    },
-    RecordTypeId: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-      comment: 'RecordTypeId',
-      field: 'RecordTypeId',
-    },
-    Record: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      comment: 'Record',
-      field: 'Record',
-    },
-    Spend: {
-      type: DataTypes.DECIMAL,
-      allowNull: false,
-      comment: 'Spend',
-      field: 'Spend',
-    },
-    RecordDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      comment: 'RecordDate',
-      field: 'RecordDate',
-    },
-    CreatedAt: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      comment: '创建时间',
-      field: 'CreatedAt',
-    },
-    UpdatedAt: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      comment: '更新时间',
-      field: 'UpdatedAt',
-    },
-  };
-  const Records = app.model.define('records', attributes, {
-    createdAt: 'CreatedAt',
-    updatedAt: 'UpdatedAt'
-  });
-  return Records;
-};
+@Table({
+  tableName: 'records'
+})
+
+export default class Records extends Model<Records> {
+  @Column({
+    type: DataTypes.STRING(50),
+    primaryKey: true,
+    autoIncrement: false,
+    comment: 'Id',
+  })
+  Id: string
+
+  @Column({
+    type: DataTypes.STRING(50),
+    allowNull: false,
+    comment: 'UserId',
+  })
+  UserId!: string
+
+  @Column({
+    type: DataTypes.STRING(50),
+    allowNull: false,
+    comment: 'RecordTypeId',
+  })
+  RecordTypeId!: string
+
+  @Column({
+    type: DataTypes.STRING(255),
+    comment: 'Record',
+  })
+  Record!: string
+
+  @Column({
+    type: DataTypes.DECIMAL,
+    comment: 'Spend',
+  })
+  Spend!: number
+
+  @Column({
+    type: DataTypes.DATE,
+    comment: 'RecordDate',
+  })
+  RecordDate!: Date
+
+  @Column({
+    allowNull: false,
+    defaultValue: 'normal',
+    comment: '状态，默认normal, 删除delete',
+  })
+  Status!: string
+
+  @CreatedAt
+  @Column
+  CreatedAt!: Date;
+
+  @UpdatedAt
+  @Column
+  UpdatedAt!: Date;
+}
