@@ -1,6 +1,6 @@
 import { Service } from 'egg';
 import { v4 as uuidv4 } from 'uuid';
-import { Accounts } from "../model/Accounts";
+import { Records } from "../model/Records";
 /**
  * Account Service
  */
@@ -11,7 +11,7 @@ export default class Account extends Service {
    */
   public async CreateAccount(Account: Api.Account.APostCreateAccount.Request): Promise<Api.Account.APostCreateAccount.Response> {
     try {
-      await Accounts.create({
+      await Records.create({
         Id: uuidv4(),
         UserId: Account.UserId,
         AccountName: Account.AccountName,
@@ -32,7 +32,7 @@ export default class Account extends Service {
    */
   public async GetAccount(Account: Api.Account.AGetAccount.Request): Promise<Api.Account.AGetAccount.Response> {
     try {
-      const AccountList: Api.AccountComponent.AccountVo[] = await Accounts.findAll({
+      const AccountList: Api.AccountComponent.AccountVo[] = await Records.findAll({
         where: {
           UserId: Account.UserId
         }
@@ -63,7 +63,7 @@ export default class Account extends Service {
  */
   public async UpdateAccount(Account: Api.Account.APutAccount.Request): Promise<Api.Account.APutAccount.Response> {
     try {
-      const rowUpdated = await Accounts.update({
+      const rowUpdated = await Records.update({
         AccountName: Account.AccountName
       },
         {
@@ -97,7 +97,7 @@ export default class Account extends Service {
    */
   public async DeleteAccount(Account: Api.Account.ADeleteAccount.Request): Promise<Api.Account.ADeleteAccount.Response> {
     try {
-      const rowDeleted = await Accounts.destroy({
+      const rowDeleted = await Records.destroy({
         where: {
           Id: Account.AccountId
         }

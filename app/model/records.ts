@@ -6,7 +6,7 @@ import { DataTypes } from 'sequelize';
   tableName: 'records'
 })
 
-export default class Records extends Model<Records> {
+export class Records extends Model<Records> {
   @Column({
     type: DataTypes.STRING(50),
     primaryKey: true,

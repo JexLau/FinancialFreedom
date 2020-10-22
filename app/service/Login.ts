@@ -1,6 +1,6 @@
 import { Service } from 'egg';
 import { v4 as uuidv4 } from 'uuid';
-import Users from "../model/Users";
+import { Users } from "../model/Users";
 /**
  * Login Service
  */
