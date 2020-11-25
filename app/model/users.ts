@@ -25,6 +25,8 @@ export class Users extends Model<Users> {
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
+    primaryKey: true,
+    autoIncrement: false,
     comment: 'UserAccount',
   })
   UserAccount!: string

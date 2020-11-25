@@ -15,6 +15,7 @@ export const sequelize = new Sequelize({
     idle: 10000,
   },
   define: {
+    timestamps: false,
     freezeTableName: true,
     underscored: false,
   },

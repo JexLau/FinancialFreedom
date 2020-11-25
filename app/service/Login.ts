@@ -54,18 +54,39 @@ export default class Login extends Service {
      */
     public async Register(User: Api.Login.APostRegister.Request): Promise<Api.Login.APostRegister.Response> {
         try {
-            await Users.create({
-                Id: uuidv4(),
-                UserName: User.UserName,
-                UserAccount: User.UserAccount,
-                Password: User.Password,
-            });
+            const { ctx } = this;
+
+            const Id = uuidv4();
+
+            const user = await Users.findOne({
+                where: {
+                    UserAccount: User.UserAccount
+                }
+            })
+
+            if (!user?.Id) {
+                await Users.create({
+                    Id,
+                    UserName: User.UserName,
+                    UserAccount: User.UserAccount,
+                    Password: User.Password,
+                });
+                await ctx.service.account.CreateAccount({ UserId: Id, AccountName: '默认账户' });
+                await ctx.service.recordType.CreateRecordType({ UserId: Id, RecordTypeName: '默认类型' });
+
+                return {
+                    code: 200,
+                    message: '注册成功',
+                    success: true
+                };
+            }
 
             return {
-                code: 200,
-                message: '注册成功',
-                success: true
+                code: 403,
+                message: '账户已注册',
+                success: false
             };
+
         } catch (error) {
             throw new Error(error.message);
         }

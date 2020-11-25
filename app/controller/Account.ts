@@ -1,11 +1,14 @@
 import { Controller } from 'egg';
-import { Get, Post, Delete, Put, Prefix } from 'egg-shell-decorators';
+import { Get, Post, Delete, Put, Prefix, Middleware } from 'egg-shell-decorators';
+import authenticate from '../middleware/authenticate';
 
 @Prefix('/api/v1/accounts')
 export default class AccountController extends Controller {
   @Post('/createAccount')
+  @Middleware([authenticate()])
   public async createAccount() {
     const { ctx } = this;
+
     try {
       const account: Api.Account.APostCreateAccount.Request = { UserId: ctx.request.body.UserId, AccountName: ctx.request.body.AccountName };
       const serviceRep = await ctx.service.account.CreateAccount(account);
@@ -22,6 +25,7 @@ export default class AccountController extends Controller {
   }
 
   @Get('/account/:UserId')
+  @Middleware([authenticate()])
   public async account() {
     const { ctx } = this;
     try {

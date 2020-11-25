@@ -21,37 +21,20 @@ export default (appInfo: EggAppInfo) => {
     },
   };
 
-  // 数据库
-  // config.sequelize = {
-  //   database: 'finance',
-  //   host: '127.0.0.1',
-  //   port: 3306,
-  //   username: 'root',
-  //   password: '123456',
-  //   pool: {
-  //     max: 5,
-  //     min: 0,
-  //     idle: 10000,
-  //   },
-  //   define: {
-  //     freezeTableName: true,
-  //     underscored: false,
-  //   },
-  //   dialectOptions: {
-  //     dateStrings: true,
-  //     typeCast(field, next) {
-  //       if (field.type === 'DATETIME') {
-  //         return field.string();
-  //       }
-  //       return next();
-  //     },
-  //   },
-  //   timezone: '+00:00',
-  //   logging: false,
-  // };
+  // 开启授权码模式和刷新 Token 模式
+  config.oAuth2Server = {
+    grants: ['authorization_code', 'refresh_token'],
+  }
 
-  // the return config will combines to EggAppConfig
+  config.view = {
+    mapping: {
+      '.ejs': 'ejs',
+    },
+  };
+
+  config.CRYPTOKEY = 'finance';
+
   return {
-    ...config,
+    ...config
   };
 };

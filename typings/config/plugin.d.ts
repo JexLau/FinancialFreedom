@@ -15,6 +15,8 @@ import 'egg-static';
 import 'egg-jsonp';
 import 'egg-view';
 import 'egg-cors';
+import 'egg-oauth2-server';
+import 'egg-view-ejs';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -31,5 +33,7 @@ declare module 'egg' {
     jsonp?: EggPluginItem;
     view?: EggPluginItem;
     cors?: EggPluginItem;
+    oAuth2Server?: EggPluginItem;
+    ejs?: EggPluginItem;
   }
 }

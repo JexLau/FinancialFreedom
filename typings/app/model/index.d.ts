@@ -3,15 +3,23 @@
 
 import 'egg';
 import ExportAccounts from '../../../app/model/Accounts';
+import ExportAuthCode from '../../../app/model/AuthCode';
+import ExportClient from '../../../app/model/Client';
 import ExportRecords from '../../../app/model/Records';
-import ExportRecordtypes from '../../../app/model/Recordtypes';
+import ExportRecordTypes from '../../../app/model/RecordTypes';
+import ExportRefreshToken from '../../../app/model/RefreshToken';
+import ExportToken from '../../../app/model/Token';
 import ExportUsers from '../../../app/model/Users';
 
 declare module 'egg' {
   interface IModel {
     Accounts: ReturnType<typeof ExportAccounts>;
+    AuthCode: ReturnType<typeof ExportAuthCode>;
+    Client: ReturnType<typeof ExportClient>;
     Records: ReturnType<typeof ExportRecords>;
-    Recordtypes: ReturnType<typeof ExportRecordtypes>;
+    RecordTypes: ReturnType<typeof ExportRecordTypes>;
+    RefreshToken: ReturnType<typeof ExportRefreshToken>;
+    Token: ReturnType<typeof ExportToken>;
     Users: ReturnType<typeof ExportUsers>;
   }
 }

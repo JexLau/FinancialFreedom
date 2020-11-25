@@ -2,24 +2,27 @@ import { Service } from 'egg';
 import { v4 as uuidv4 } from 'uuid';
 import { Records } from "../model/Records";
 /**
- * Account Service
+ * Record Service
  */
-export default class Account extends Service {
+export default class Record extends Service {
 
   /** 创建账户
-   * @param AccountName - your account name
+   * @param RecordName - your Record name
    */
-  public async CreateAccount(Account: Api.Account.APostCreateAccount.Request): Promise<Api.Account.APostCreateAccount.Response> {
+  public async CreateRecord(Record: Api.Record.APostCreateRecord.Request): Promise<Api.Record.APostCreateRecord.Response> {
     try {
       await Records.create({
         Id: uuidv4(),
-        UserId: Account.UserId,
-        AccountName: Account.AccountName,
+        UserId: Record.UserId,
+        RecordTypeId: Record.RecordTypeId,
+        Record: Record.Record,
+        Spend: Record.Spend,
+        RecordDate: Record.RecordDate,
       });
 
       return {
         code: 200,
-        message: '创建账户成功',
+        message: '创建记录成功',
         success: true
       };
     } catch (error) {
@@ -30,20 +33,20 @@ export default class Account extends Service {
   /** 获取用户账户
    * @param UserId - userId
    */
-  public async GetAccount(Account: Api.Account.AGetAccount.Request): Promise<Api.Account.AGetAccount.Response> {
+  public async GetRecord(Record: Api.Record.AGetRecord.Request): Promise<Api.Record.AGetRecord.Response> {
     try {
-      const AccountList: Api.AccountComponent.AccountVo[] = await Records.findAll({
+      const RecordList: Api.RecordComponent.RecordVo[] = await Records.findAll({
         where: {
-          UserId: Account.UserId
+          UserId: Record.UserId
         }
       })
 
-      if (AccountList.length) {
+      if (RecordList.length) {
         return {
           code: 200,
           message: '查询成功',
           success: true,
-          data: AccountList
+          data: RecordList
         }
       }
 
@@ -61,14 +64,14 @@ export default class Account extends Service {
   /** 删除用户账户
  * @param UserId - userId
  */
-  public async UpdateAccount(Account: Api.Account.APutAccount.Request): Promise<Api.Account.APutAccount.Response> {
+  public async UpdateRecord(Record: Api.Record.APutRecord.Request): Promise<Api.Record.APutRecord.Response> {
     try {
       const rowUpdated = await Records.update({
-        AccountName: Account.AccountName
+        Record: Record.Record
       },
         {
           where: {
-            Id: Account.AccountId
+            Id: Record.RecordId
           }
         }
       );
@@ -95,11 +98,11 @@ export default class Account extends Service {
   /** 删除用户账户
    * @param UserId - userId
    */
-  public async DeleteAccount(Account: Api.Account.ADeleteAccount.Request): Promise<Api.Account.ADeleteAccount.Response> {
+  public async DeleteRecord(Record: Api.Record.ADeleteRecord.Request): Promise<Api.Record.ADeleteRecord.Response> {
     try {
       const rowDeleted = await Records.destroy({
         where: {
-          Id: Account.AccountId
+          Id: Record.RecordId
         }
       });
 
