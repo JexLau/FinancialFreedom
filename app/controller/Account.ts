@@ -5,27 +5,22 @@ import authenticate from '../middleware/authenticate';
 @Prefix('/api/v1/accounts')
 export default class AccountController extends Controller {
   @Post('/createAccount')
-  @Middleware([authenticate()])
+  @Middleware([ authenticate() ])
   public async createAccount() {
     const { ctx } = this;
 
     try {
-      const account: Api.Account.APostCreateAccount.Request = { UserId: ctx.request.body.UserId, AccountName: ctx.request.body.AccountName };
-      const serviceRep = await ctx.service.account.CreateAccount(account);
-      ctx.body = serviceRep;
+      const account = { UserId: ctx.request.body.UserId, AccountName: ctx.request.body.AccountName };
+      await ctx.service.account.CreateAccount(account);
+      this.ctx.success();
     } catch (error) {
       console.log(error.stack);
-      const serviceRep = {
-        code: 500,
-        message: error.message,
-        success: false,
-      }
-      ctx.body = serviceRep;
+      this.ctx.fail();
     }
   }
 
   @Get('/account/:UserId')
-  @Middleware([authenticate()])
+  @Middleware([ authenticate() ])
   public async account() {
     const { ctx } = this;
     try {
@@ -38,7 +33,7 @@ export default class AccountController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }
@@ -56,7 +51,7 @@ export default class AccountController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }
@@ -74,7 +69,7 @@ export default class AccountController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }

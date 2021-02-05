@@ -3,7 +3,7 @@ import { Column, Model, Table } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
 @Table({
-  tableName: 'client'
+  tableName: 'client',
 })
 
 export class Client extends Model<Client> {
@@ -13,14 +13,14 @@ export class Client extends Model<Client> {
     autoIncrement: false,
     comment: 'Client Id',
   })
-  Id: string
+  Id: string;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: 'Client Secret',
   })
-  Secret!: string
+  Secret!: string;
 
   @Column({
     type: DataTypes.STRING(200),
@@ -29,7 +29,7 @@ export class Client extends Model<Client> {
     autoIncrement: false,
     comment: '客户端的回调 URL',
   })
-  RedirectUri!: string
+  RedirectUri!: string;
 
 
   @Column({
@@ -37,6 +37,6 @@ export class Client extends Model<Client> {
     allowNull: false,
     comment: '授权模式，比如授权码模式',
   })
-  Grants!: string
+  Grants!: string;
 
 }

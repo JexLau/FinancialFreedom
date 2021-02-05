@@ -3,7 +3,7 @@ import { Column, CreatedAt, Model, Table, UpdatedAt } from 'sequelize-typescript
 import { DataTypes } from 'sequelize';
 
 @Table({
-  tableName: 'users'
+  tableName: 'users',
 })
 
 export class Users extends Model<Users> {
@@ -13,14 +13,14 @@ export class Users extends Model<Users> {
     autoIncrement: false,
     comment: 'Id',
   })
-  Id: string
+  Id: string;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: 'UserName',
   })
-  UserName!: string
+  UserName!: string;
 
   @Column({
     type: DataTypes.STRING(50),
@@ -29,7 +29,7 @@ export class Users extends Model<Users> {
     autoIncrement: false,
     comment: 'UserAccount',
   })
-  UserAccount!: string
+  UserAccount!: string;
 
 
   @Column({
@@ -37,14 +37,14 @@ export class Users extends Model<Users> {
     allowNull: false,
     comment: 'Password',
   })
-  Password!: string
+  Password!: string;
 
   @Column({
     allowNull: false,
     defaultValue: 'normal',
     comment: '状态，默认normal, 删除delete',
   })
-  Status!: string
+  Status!: string;
 
   @CreatedAt
   @Column

@@ -16,7 +16,7 @@ export default class RecordController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }
@@ -34,7 +34,7 @@ export default class RecordController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }
@@ -52,7 +52,7 @@ export default class RecordController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }
@@ -70,7 +70,7 @@ export default class RecordController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }

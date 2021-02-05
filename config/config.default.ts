@@ -23,8 +23,8 @@ export default (appInfo: EggAppInfo) => {
 
   // 开启授权码模式和刷新 Token 模式
   config.oAuth2Server = {
-    grants: ['authorization_code', 'refresh_token'],
-  }
+    grants: [ 'authorization_code', 'refresh_token' ],
+  };
 
   config.view = {
     mapping: {
@@ -35,6 +35,6 @@ export default (appInfo: EggAppInfo) => {
   config.CRYPTOKEY = 'finance';
 
   return {
-    ...config
+    ...config,
   };
 };

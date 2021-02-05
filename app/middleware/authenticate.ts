@@ -7,7 +7,7 @@ export default function authenticate() {
   return async (ctx: Context, next: () => Promise<any>) => {
     const authenticate = ctx.app.oAuth2Server.authenticate();
     await authenticate(ctx, next);
-    if (ctx.status == 400 || ctx.status == 401) {
+    if (ctx.status === 400 || ctx.status === 401) {
       ctx.body = {
         code: ctx.status,
         message: ctx.response.message,

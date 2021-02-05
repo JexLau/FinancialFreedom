@@ -32,7 +32,7 @@ export default class FooBoot implements IBoot {
   async serverDidReady() {
     // Server is listening.
     await sequelize.sync();
-    console.log('database sync finish.')
+    console.log('database sync finish.');
   }
 
   async beforeClose() {

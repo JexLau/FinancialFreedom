@@ -18,7 +18,7 @@ export default class LoginController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }
@@ -28,7 +28,7 @@ export default class LoginController extends Controller {
     const { ctx } = this;
     try {
       const user: Api.Login.APostRegister.Request = ctx.request.body;
-      console.log(user)
+      console.log(user);
       const serviceRep = await ctx.service.login.Register(user);
       ctx.body = serviceRep;
     } catch (error) {
@@ -37,7 +37,7 @@ export default class LoginController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }
@@ -53,7 +53,7 @@ export default class LoginController extends Controller {
     });
   }
 
-  @Middleware([authorize()])
+  @Middleware([ authorize() ])
   @Get('/authorize')
   async authorize() {
     const { ctx } = this;
@@ -62,8 +62,8 @@ export default class LoginController extends Controller {
   }
 
   @Get('/token')
-  @Middleware([token()])
+  @Middleware([ token() ])
   async token() {
-    console.log("====================get token====================")
+    console.log('====================get token====================');
   }
 }

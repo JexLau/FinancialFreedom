@@ -1,4 +1,4 @@
-'use strict';
+
 // import { Application } from 'egg';
 import { Client } from '../model/Client';
 import { Users } from '../model/Users';
@@ -12,12 +12,12 @@ const CRYPTOKEY = 'finance';
 export default function oAuth2Server() {
   class Model {
     /** 获取客户端信息
-     * @param {*} clientId 要查询的客户端 id
-     * @param {*} clientSecret 要校验的客户端密钥
+     * @param {*} ClientId 要查询的客户端 id
+     * @param {*} ClientSecret 要校验的客户端密钥
      * @return {*} object
      */
     async getClient(ClientId, ClientSecret) {
-      console.log("getClient", ClientId, ClientSecret)
+      console.log('getClient', ClientId, ClientSecret);
       const client = await Client.findOne({
         where: {
           Id: ClientId,
@@ -36,12 +36,12 @@ export default function oAuth2Server() {
      * 授权码模式需要实现用户认证
      * user 对象对 oauth2-server 完全透明，并且仅用作其他模型函数的输入。
      * 这两个参数来自于用户调用获取token接口时传的username和password
-     * @param {*} username 用户名
-     * @param {*} password 密码
+     * @param {*} UserAccount 用户名
+     * @param {*} Password 密码
      * @return {*} 返回用户信息
      */
     async getUser(UserAccount, Password) {
-      console.log("getUser", UserAccount, Password)
+      console.log('getUser', UserAccount, Password);
       const md5Password = cryptoMd5(CRYPTOKEY, Password);
       const user = await Users.findOne({
         where: {
@@ -64,13 +64,13 @@ export default function oAuth2Server() {
 
     /** 保存授权码信息
      *
-     * @param {*} code 要保存的授权码信息
-     * @param {*} client 要保存的客户端信息
-     * @param {*} user 要保存的用户信息
+     * @param {*} Code 要保存的授权码信息
+     * @param {*} Client 要保存的客户端信息
+     * @param {*} User 要保存的用户信息
      * @memberof Model
      */
     async saveAuthorizationCode(Code, Client, User) {
-      console.log("saveAuthorizationCode", Code, Client, User)
+      console.log('saveAuthorizationCode', Code, Client, User);
       try {
         const code = {
           Code: Code.Code,
@@ -79,7 +79,7 @@ export default function oAuth2Server() {
           Scope: Code.Scope || '',
           ClientId: Client.Id,
           UserId: User.Id,
-        }
+        };
         // 1. 保存授权码信息到数据库
         await AuthCode.create(code);
 
@@ -98,24 +98,24 @@ export default function oAuth2Server() {
 
     /** 获取授权码信息
      * 查询通过 saveAuthorizationCode() 方法存储过的授权码信息，并返回
-     * @param {*} authorizationCode 要查询的授权码 id
+     * @param {*} Code 要查询的授权码 id
      * @return {*} object
      * @memberof Model
      */
     async getAuthorizationCode(Code) {
-      console.log("getAuthorizationCode", Code)
+      console.log('getAuthorizationCode', Code);
       // 1. 从数据库中查询授权码信息
       const authCode = await AuthCode.findOne({
         where: {
           Code,
-        }
+        },
       });
       if (!authCode) return false;
 
       const user = await Users.findOne({
         where: {
           Id: authCode.UserId,
-        }
+        },
       });
       if (!user) return false;
 
@@ -130,14 +130,14 @@ export default function oAuth2Server() {
     }
 
     /** 保存 token 令牌，包括访问令牌和刷新令牌。
-     * @param {*} token 要保存的 token 令牌
-     * @param {*} client 要保存的客户端信息
-     * @param {*} user 要保存的用户信息
+     * @param {*} Token 要保存的 token 令牌
+     * @param {*} Client 要保存的客户端信息
+     * @param {*} User 要保存的用户信息
      * @return {*} object
      * @memberof Model
      */
     async saveToken(Token, Client, User) {
-      console.log("saveToken", Token, Client, User)
+      console.log('saveToken', Token, Client, User);
       try {
         // 1.保存访问令牌
         const accessToken = await TokenModel.create({
@@ -173,18 +173,18 @@ export default function oAuth2Server() {
     }
 
     /** 获取访问令牌信息。
- * @param {*} accessToken 要查询的访问令牌
+ * @param {*} AccessToken 要查询的访问令牌
  * @return {*} object
  * @memberof Model
  */
     async getAccessToken(AccessToken) {
-      console.log("getAccessToken", AccessToken)
+      console.log('getAccessToken', AccessToken);
       try {
         // 1. 查询数据库，获取访问密钥信息
         const token = await TokenModel.findOne({
           where: {
             token: AccessToken,
-          }
+          },
         });
         // 2. 查询数据库，获取客户端信息
         // const client = await this.ctx.model.Client.findOne({
@@ -211,18 +211,18 @@ export default function oAuth2Server() {
     }
 
     /** 吊销刷新令牌
-     * @param {*} token 要删除的刷新令牌 Object
+     * @param {*} Token 要删除的刷新令牌 Object
      * @return {*} object
      * @memberof Model
      */
     async revokeToken(Token) {
-      console.log("revokeToken", Token)
+      console.log('revokeToken', Token);
       try {
         // 查询数据库并删除刷新令牌
         return await RefreshToken.destroy({
           where: {
             Token: Token.RefreshToken,
-          }
+          },
         });
       } catch (error) {
         return false;
@@ -231,35 +231,35 @@ export default function oAuth2Server() {
 
     /** 吊销授权码信息
      *
-     * @param {*} code 要吊销的授权码信息
+     * @param {*} Code 要吊销的授权码信息
      * @return {*} object
      * @memberof Model
      */
     async revokeAuthorizationCode(Code) {
-      console.log("revokeAuthorizationCode", Code)
+      console.log('revokeAuthorizationCode', Code);
       try {
         return await AuthCode.destroy({
           where: {
             Code: Code.Code,
-          }
+          },
         });
       } catch (error) {
         return false;
       }
     }
     /** 获取刷新令牌信息
-     * @param {*} refreshToken 要查询的刷新令牌 id
+     * @param {*} Rtoken 要查询的刷新令牌 id
      * @return {*} object
      * @memberof Model
      */
     async getRefreshToken(Rtoken) {
-      console.log("getRefreshToken", Rtoken)
+      console.log('getRefreshToken', Rtoken);
       try {
         // 1. 查询数据库获取刷新令牌
         const token = await RefreshToken.findOne({
           where: {
             Token: Rtoken,
-          }
+          },
         });
         if (!token) return false;
 

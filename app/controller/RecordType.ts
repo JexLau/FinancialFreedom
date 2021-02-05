@@ -8,7 +8,7 @@ export default class RecordTypeController extends Controller {
     const { ctx } = this;
     try {
       const recordtype: Api.RecordType.APostCreateRecordType.Request = { UserId: ctx.request.body.UserId, RecordTypeName: ctx.request.body.RecordTypeName };
-      const serviceRep = await ctx.service.recordType.CreateRecordType(recordtype)
+      const serviceRep = await ctx.service.recordType.CreateRecordType(recordtype);
       ctx.body = serviceRep;
     } catch (error) {
       console.log(error.stack);
@@ -16,7 +16,7 @@ export default class RecordTypeController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }
@@ -34,7 +34,7 @@ export default class RecordTypeController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }
@@ -52,7 +52,7 @@ export default class RecordTypeController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }
@@ -70,7 +70,7 @@ export default class RecordTypeController extends Controller {
         code: 500,
         message: error.message,
         success: false,
-      }
+      };
       ctx.body = serviceRep;
     }
   }

@@ -3,7 +3,7 @@ import { Column, CreatedAt, Model, Table, UpdatedAt } from 'sequelize-typescript
 import { DataTypes } from 'sequelize';
 
 @Table({
-  tableName: 'records'
+  tableName: 'records',
 })
 
 export class Records extends Model<Records> {
@@ -13,46 +13,46 @@ export class Records extends Model<Records> {
     autoIncrement: false,
     comment: 'Id',
   })
-  Id: string
+  Id: string;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: 'UserId',
   })
-  UserId!: string
+  UserId!: string;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: 'RecordTypeId',
   })
-  RecordTypeId!: string
+  RecordTypeId!: string;
 
   @Column({
     type: DataTypes.STRING(255),
     comment: 'Record',
   })
-  Record!: string
+  Record!: string;
 
   @Column({
     type: DataTypes.DECIMAL,
     comment: 'Spend',
   })
-  Spend!: number
+  Spend!: number;
 
   @Column({
     type: DataTypes.DATE,
     comment: 'RecordDate',
   })
-  RecordDate!: Date
+  RecordDate!: Date;
 
   @Column({
     allowNull: false,
     defaultValue: 'normal',
     comment: '状态，默认normal, 删除delete',
   })
-  Status!: string
+  Status!: string;
 
   @CreatedAt
   @Column

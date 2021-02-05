@@ -3,7 +3,7 @@ import { Column, Model, Table } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
 @Table({
-  tableName: 'token'
+  tableName: 'token',
 })
 
 export class Token extends Model<Token> {
@@ -12,21 +12,21 @@ export class Token extends Model<Token> {
     autoIncrement: true,
     comment: 'Id',
   })
-  Id: number
+  Id: number;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: 'token',
   })
-  Token!: string
+  Token!: string;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: 'ClientId',
   })
-  ClientId!: string
+  ClientId!: string;
 
   @Column({
     type: DataTypes.STRING(200),
@@ -35,20 +35,20 @@ export class Token extends Model<Token> {
     autoIncrement: false,
     comment: 'userId',
   })
-  UserId!: string
+  UserId!: string;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: 'ExpiresAt',
   })
-  ExpiresAt!: string
+  ExpiresAt!: string;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: '授权范围',
   })
-  Scope!: string
+  Scope!: string;
 
 }

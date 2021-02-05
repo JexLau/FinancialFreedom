@@ -19,7 +19,7 @@ export default function token() {
       return;
     }
 
-    if (ctx.status == 400 || ctx.status == 401) {
+    if (ctx.status === 400 || ctx.status === 401) {
       ctx.body = {
         code: ctx.status,
         message: ctx.body.error_description.message,

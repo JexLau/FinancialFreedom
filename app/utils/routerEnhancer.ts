@@ -111,7 +111,7 @@ class RouteEnhancer {
         });
       });
     });
-  }
+  };
 
   /**
    * 路由映射 - 简化 router 和 Controller 代码
@@ -133,7 +133,7 @@ class RouteEnhancer {
         RouteEnhancer.handleMethodDecorator(target, path, method, propName, middleware);
         return;
       }
-    }
+    };
 }
 
 const routerEnhancer = new RouteEnhancer();

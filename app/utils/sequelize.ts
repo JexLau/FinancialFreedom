@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import path from "path";
+import path from 'path';
 
 export const sequelize = new Sequelize({
   dialect: 'mysql',
@@ -8,7 +8,7 @@ export const sequelize = new Sequelize({
   port: 3306,
   username: 'root',
   password: '123456',
-  models: [path.resolve(__dirname, '../model')],
+  models: [ path.resolve(__dirname, '../model') ],
   pool: {
     max: 5,
     min: 0,
@@ -30,4 +30,4 @@ export const sequelize = new Sequelize({
   },
   timezone: '+00:00',
   logging: false,
-})
+});

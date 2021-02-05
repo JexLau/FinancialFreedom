@@ -3,7 +3,7 @@ import { Column, Model, Table } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
 @Table({
-  tableName: 'authcode'
+  tableName: 'authcode',
 })
 
 export class AuthCode extends Model<AuthCode> {
@@ -12,14 +12,14 @@ export class AuthCode extends Model<AuthCode> {
     autoIncrement: true,
     comment: 'Id',
   })
-  Id: number
+  Id: number;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: 'ClientId',
   })
-  ClientId!: string
+  ClientId!: string;
 
   @Column({
     type: DataTypes.STRING(200),
@@ -28,7 +28,7 @@ export class AuthCode extends Model<AuthCode> {
     autoIncrement: false,
     comment: 'userId',
   })
-  UserId!: string
+  UserId!: string;
 
 
   @Column({
@@ -36,26 +36,26 @@ export class AuthCode extends Model<AuthCode> {
     allowNull: false,
     comment: 'Code',
   })
-  Code!: string
+  Code!: string;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: 'ExpiresAt',
   })
-  ExpiresAt!: string
+  ExpiresAt!: string;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: '客户端回调 URL',
   })
-  RedirectUri!: string
+  RedirectUri!: string;
 
   @Column({
     type: DataTypes.STRING(50),
     allowNull: false,
     comment: '授权范围',
   })
-  Scope!: string
+  Scope!: string;
 }
